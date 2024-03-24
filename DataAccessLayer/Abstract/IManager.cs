@@ -14,6 +14,7 @@ namespace DataAccessLayer.Abstract
 
         //Read
         List<Manager> GetAll();
+        Manager Get(int id);
         //T GetByID(short id);
 
         //Update

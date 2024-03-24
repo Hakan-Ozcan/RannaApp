@@ -23,6 +23,10 @@ namespace DataAccessLayer.Concrete
             _context.Set<Manager>().Add(p);
             _context.SaveChanges();
         }
+        public Manager Get(int id)
+        {
+            return _context.Set<Manager>().FirstOrDefault(m => m.id == id);
+        }
 
         public void Delete(int id)
         {

@@ -10,6 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IManagerService
     {
         void ManagerAdd(Manager manager);
+        Manager GetManager(int id);
         List<Manager> GetManagers();
         void ManagerDelete(int id);
         void ManagerUpdate(Manager manager);

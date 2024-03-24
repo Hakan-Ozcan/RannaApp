@@ -22,7 +22,7 @@ namespace DataAccessLayer.DatabaseContext
         public DbSet<SupportForm> supportForm { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-AEUI2LS;Database=RannaAppDb;Trusted_Connection=SSPI;MultipleActiveResultSets=true;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Server=SAWRNTGOYZLM6\\SQLEXPRESS01;Database=RannaAppDb;Trusted_Connection=SSPI;MultipleActiveResultSets=true;TrustServerCertificate=true");
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

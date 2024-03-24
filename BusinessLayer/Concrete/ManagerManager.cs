@@ -22,6 +22,10 @@ namespace BusinessLayer.Concrete
         {
             return _manager.GetAll();
         }
+        public Manager GetManager(int id)
+        {
+            return _manager.Get(id);
+        }
 
         public void ManagerAdd(Manager manager)
         {

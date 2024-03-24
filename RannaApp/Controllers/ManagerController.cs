@@ -39,14 +39,14 @@ namespace YourNamespace.Controllers
 
         public IActionResult Edit(int id)
         {
-            //            var manager = _managerService.GetManagers().Find(m => m.Name == id
-            //);
-            //            if (manager == null)
-            //            {
-            //                return NotFound();
-            //            }
-            //            return View(manager);
-            return View();
+            var manager = _managerService.GetManagers().Find(m => m.id == id
+);
+            if (manager == null)
+            {
+                return NotFound();
+            }
+            return View(manager);
+         
         }
 
         [HttpPost]
@@ -63,13 +63,12 @@ namespace YourNamespace.Controllers
 
         public IActionResult Delete(int id)
         {
-            //var manager = _managerService.GetManagers().Find(m => m.Id == id);
-            //if (manager == null)
-            //{
-            //    return NotFound();
-            //}
-            //return View(manager);
-            return View();
+            var manager = _managerService.GetManager(id);
+            if (manager == null)
+            {
+                return NotFound();
+            }
+            return View(manager);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -77,6 +76,7 @@ namespace YourNamespace.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _managerService.ManagerDelete(id);
+            ViewBag.Deleted = true; // Silme işlemi tamamlandığında ViewBag'de bir bayrak ayarlayın
             return RedirectToAction("Index");
         }
     }
