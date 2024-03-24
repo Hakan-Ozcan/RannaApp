@@ -9,6 +9,18 @@ namespace DataAccessLayer.Abstract
 {
     public interface ISupportForm
     {
-        IEnumerable<SupportForm> GetAll();
+        //Create
+        void Add(SupportForm p);
+
+        //Read
+        List<SupportForm> GetAll();
+        //T GetByID(short id);
+
+        //Update
+        void Update(int id, SupportForm updatedForm);
+
+        //Delete
+        //void DeleteByID(short id);
+        void Delete(int id);
     }
 }

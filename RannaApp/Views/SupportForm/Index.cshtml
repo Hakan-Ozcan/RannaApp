@@ -1,0 +1,73 @@
+﻿@model List<EntityLayer.Entities.SupportForm>
+
+@{
+    ViewBag.Title = "Support Forms";
+}
+
+<h2>Support Forms</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.User</td>
+                    <td>@form.Subject</td>
+                    <td>@form.Message</td>
+                    <td>@form.Date.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @Html.DropDownList("status", new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Pending", Value = "Pending", Selected = (form.FormStatus == "Pending") },
+                new SelectListItem { Text = "In Progress", Value = "In Progress", Selected = (form.FormStatus == "In Progress") },
+                new SelectListItem { Text = "Completed", Value = "Completed", Selected = (form.FormStatus == "Completed") }
+                }, new { onchange = "updateStatus(@form.id, this.value)" })
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editForm(@form.Id)">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No support forms available.</p>
+}
+
+<script>
+    function updateStatus(formId, status) {
+        // AJAX request to update form status
+        $.ajax({
+            type: "POST",
+            url: "/Support/UpdateStatus",
+            data: { id: formId, status: status },
+            success: function (result) {
+                // Handle success
+                alert("Status updated successfully.");
+            },
+            error: function () {
+                // Handle error
+                alert("Error updating status.");
+            }
+        });
+    }
+
+    function editForm(formId) {
+        // Redirect to edit form page
+        window.location.href = "/Support/Edit/" + formId;
+    }
+</script>

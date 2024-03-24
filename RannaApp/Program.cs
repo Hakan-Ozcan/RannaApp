@@ -13,9 +13,11 @@ builder.Services.AddDbContext<Context>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICustomerService, CustomerManager>();
 builder.Services.AddScoped<IManagerService, ManagerManager>();
+builder.Services.AddScoped<ISupportFormService, SupportFormManager>();
 
 builder.Services.AddScoped<ICustomer, CustomerRepository>();
 builder.Services.AddScoped<IManager, ManagerRepository>();
+builder.Services.AddScoped<ISupportForm, SupportFormRepository>();
 
 
 var app = builder.Build();

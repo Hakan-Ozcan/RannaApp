@@ -10,11 +10,11 @@ namespace EntityLayer.Entities
     public class SupportForm
     {
         [Key]
-        public int id { get; set; }
-        public string user { get; set; }
-        public string subject { get; set; }
-        public string message { get; set; }
-        public DateTime date { get; set; }
-        public string formStatu { get; set; }
+        public int Id { get; set; }
+        public string User { get; set; }
+        public string Subject { get; set; }
+        public string Message { get; set; }
+        public DateTime Date { get; set; }
+        public string FormStatus { get; set; }
     }
 }
