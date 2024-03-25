@@ -2,6 +2,8 @@
 using EntityLayer.Entities;
 using BusinessLayer.Abstract;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using RannaApi.Controllers;
 
 namespace YourNamespace.Controllers
 {
@@ -32,25 +34,23 @@ namespace YourNamespace.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Burada supportForm parametresiyle gelen verileri kullanarak güncelleme işlemini yapabilirsiniz.
-                // Örneğin:
-                //_supportFormService.UpdateSupportFormStatus(supportForm);
+             
                 return RedirectToAction("Index");
             }
-            return View(supportForm); // Doğrulama hatası varsa, formu tekrar göster
+            return View(supportForm);
         }
         public IActionResult Edit(int id)
         {
-            // Belirli bir formun bilgilerini al
+     
             var supportForm = _supportFormService.GetSupportForm(id);
 
-            // Form bulunamazsa hata sayfasına yönlendir
+       
             if (supportForm == null)
             {
                 return NotFound();
             }
 
-            // Düzenleme sayfasını göster
+     
             return View(supportForm);
         }
         [HttpGet]
@@ -69,6 +69,36 @@ namespace YourNamespace.Controllers
                 return RedirectToAction("Index");
             }
             return View(supportForm);
+        }
+      
+        [HttpPost]
+        [Route("api/SupportForm/Create")]
+        [Authorize] 
+        public async Task<IActionResult> CreateApi([FromBody] SupportFormDto supportFormDto)
+        {
+            try
+            {
+             
+                var supportForm = new SupportForm
+                {
+                    User = supportFormDto.User,
+                    Subject = supportFormDto.Subject,
+                    Message = supportFormDto.Message,
+                    Date = DateTime.Now,
+                    FormStatus = "New" 
+                };
+
+           
+                _supportFormService.SupportFormAdd(supportForm);
+
+          
+                return Ok(new { success = true, supportFormId = supportForm.Id });
+            }
+            catch (Exception ex)
+            {
+             
+                return StatusCode(500, new { success = false, error = ex.Message });
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DataAccessLayer.Concrete
 
         public async Task<Customer> GetUserByUsernameAsync(string username)
         {
-            // Kullanıcıyı veritabanından kullanıcı adına göre bul ve geri döndür
+      
             return await _context.Set<Customer>().FirstOrDefaultAsync(c => c.username == username);
         }
 

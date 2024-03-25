@@ -19,32 +19,32 @@ namespace RannaApi.Controllers
 
         public static bool VerifyPassword(string password, string storedPassword)
         {
-            // Kullanıcının girdiği parolayı, veritabanındaki kayıtlı parolayla karşılaştır
+    
             return password == storedPassword;
         }
 
         public async Task<LoginResponse> LoginAsync(string username, string password)
         {
-            // Kullanıcı doğrulaması yap
+      
             var user = await _customerService.GetUserByUsernameAsync(username);
             if (user == null)
             {
-                // Kullanıcı yoksa, giriş başarısız
+       
                 return new LoginResponse { result = false, token = null };
             }
 
-            // Şifreyi doğrula
+ 
             bool isPasswordValid = VerifyPassword(password, user.password);
             if (!isPasswordValid)
             {
-                // Şifre doğrulanamazsa, giriş başarısız
+            
                 return new LoginResponse { result = false, token = null };
             }
 
-            // Token oluştur
+      
             var token = GenerateJwtToken(user.id);
 
-            // Giriş başarılı, token ile birlikte başarılı yanıtı döndür
+     
             return new LoginResponse { result = true, token = token };
         }
 

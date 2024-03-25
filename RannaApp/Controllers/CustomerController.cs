@@ -70,7 +70,7 @@ namespace RannaUI.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _customerService.CustomerDelete(id);
-            ViewBag.Deleted = true; // Silme işlemi tamamlandığında ViewBag'de bir bayrak ayarlayın
+            ViewBag.Deleted = true; 
             return RedirectToAction("Index");
         }
     }

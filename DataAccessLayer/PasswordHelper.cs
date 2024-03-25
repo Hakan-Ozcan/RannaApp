@@ -6,7 +6,7 @@ public class PasswordHelper
 {
     public static string HashPassword(string password)
     {
-        // Şifreyi salt ile birleştirerek hashleme işlemi gerçekleştir
+  
         byte[] salt = GenerateSalt();
         byte[] hash = GenerateHash(password, salt);
         return Convert.ToBase64String(salt) + "|" + Convert.ToBase64String(hash);
@@ -14,15 +14,13 @@ public class PasswordHelper
 
     public static bool VerifyPassword(string password, string hashedPassword)
     {
-        // Salt ve hash'i ayrıştır
+  
         string[] parts = hashedPassword.Split('|');
         byte[] salt = Convert.FromBase64String(parts[0]);
         byte[] hash = Convert.FromBase64String(parts[1]);
 
-        // Verilen şifreyi ve salt'ı kullanarak hash'i yeniden oluştur ve karşılaştır
         byte[] inputHash = GenerateHash(password, salt);
 
-        // Karşılaştırma işlemi
         return CompareByteArrays(hash, inputHash);
     }
 

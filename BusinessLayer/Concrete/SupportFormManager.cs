@@ -38,8 +38,7 @@ namespace BusinessLayer.Concrete
 
         public void UpdateSupportFormStatus(int id, string status)
         {
-            // GetById metodunun kullanılamadığı durumda, burada istenen destek formunu başka bir şekilde almanız gerekecek
-            // Örneğin, GetAll metodunu kullanarak bir filtreleme yapabilirsiniz.
+     
             List<SupportForm> supportForms = _supportform.GetAll();
             SupportForm supportFormToUpdate = supportForms.Find(s => s.Id == id);
 
@@ -48,7 +47,7 @@ namespace BusinessLayer.Concrete
                 supportFormToUpdate.FormStatus = status;
                 _supportform.Update(id, supportFormToUpdate);
             }
-            // supportFormToUpdate null ise veya güncellenemediyse bir hata işlemi gerçekleştirilebilir.
+ 
         }
     }
 }

@@ -76,7 +76,7 @@ namespace YourNamespace.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _managerService.ManagerDelete(id);
-            ViewBag.Deleted = true; // Silme işlemi tamamlandığında ViewBag'de bir bayrak ayarlayın
+            ViewBag.Deleted = true;
             return RedirectToAction("Index");
         }
     }

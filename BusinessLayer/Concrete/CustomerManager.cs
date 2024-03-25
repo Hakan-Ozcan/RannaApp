@@ -21,8 +21,7 @@ namespace BusinessLayer.Concrete
 
         public async Task<Customer> GetUserByUsernameAsync(string username)
         {
-            // Kullanıcı adına göre kullanıcıyı getirme işlemi yapılacak.
-            // Burada gerekli işlemleri gerçekleştirin.
+ 
             return await _customer.GetUserByUsernameAsync(username);
         }
         public void CustomerAdd(Customer customer)
