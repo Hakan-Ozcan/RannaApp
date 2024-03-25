@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Entities
 {
-    internal class LoginResponse: ResponseBase
+    public class LoginResponse: ResponseBase
     {
         public bool result { get; set; }
         public string token { get; set; }

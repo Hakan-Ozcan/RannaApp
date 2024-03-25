@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,22 +17,22 @@ namespace RannaApi.Controllers
             _customerService = customerService;
         }
 
-        public async Task<(bool, string)> LoginAsync(string username, string password)
+        public LoginResponse LoginAsync(string username, string password)
         {
             // Kullanıcı doğrulaması yap
-            var isAuthenticated = await _customerService.ValidateUserAsync(username, password);
+            var isAuthenticated = _customerService.ValidateUserAsync(username, password);
             if (!isAuthenticated)
             {
-                return (false, null);
+                return new LoginResponse { result = false, token = null };
             }
 
             // Kullanıcıyı bul
-            var user = await _customerService.GetUserByUsernameAsync(username);
+            var user = _customerService.GetUserByUsernameAsync(username);
 
             // Token oluştur
-            var token = GenerateJwtToken(user.id);
+            var token = GenerateJwtToken(user.Id);
 
-            return (true, token);
+            return new LoginResponse { result=true, token = token };
         }
 
         private string GenerateJwtToken(int userId)
