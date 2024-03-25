@@ -26,11 +26,32 @@ namespace YourNamespace.Controllers
             _supportFormService.UpdateSupportFormStatus(id, status);
             return Ok();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(SupportForm supportForm)
+        {
+            if (ModelState.IsValid)
+            {
+                // Burada supportForm parametresiyle gelen verileri kullanarak güncelleme işlemini yapabilirsiniz.
+                // Örneğin:
+                //_supportFormService.UpdateSupportFormStatus(supportForm);
+                return RedirectToAction("Index");
+            }
+            return View(supportForm); // Doğrulama hatası varsa, formu tekrar göster
+        }
         public IActionResult Edit(int id)
         {
-            // Burada düzenleme sayfasını oluşturmak için gerekli işlemleri yapabilirsiniz.
-            return RedirectToAction("Index"); // Örnek amaçlı Index sayfasına yönlendirme yapıldı.
+            // Belirli bir formun bilgilerini al
+            var supportForm = _supportFormService.GetSupportForm(id);
+
+            // Form bulunamazsa hata sayfasına yönlendir
+            if (supportForm == null)
+            {
+                return NotFound();
+            }
+
+            // Düzenleme sayfasını göster
+            return View(supportForm);
         }
         [HttpGet]
         public IActionResult Create()

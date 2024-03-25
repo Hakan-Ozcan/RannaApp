@@ -11,6 +11,7 @@ namespace BusinessLayer.Abstract
     {
         void SupportFormAdd(SupportForm supportForm);
         List<SupportForm> GetSupportForms();
+        SupportForm GetSupportForm(int id);
         void SupportFormDelete(int id);
         void UpdateSupportFormStatus(int id, string status);
     }

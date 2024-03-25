@@ -9,8 +9,11 @@ namespace BusinessLayer.Abstract
 {
     public interface ICustomerService
     {
+        Task<bool> ValidateUserAsync(string username, string password);
+        Task<Customer> GetUserByUsernameAsync(string username);
         void CustomerAdd(Customer customer);
         List<Customer> GetCustomers();
+        Customer GetCustomer(int id);
         void CustomerDelete(int id);
         void CustomerUpdate(Customer customer);
       

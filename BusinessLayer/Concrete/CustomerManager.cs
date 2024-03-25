@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,19 @@ namespace BusinessLayer.Concrete
         public CustomerManager(ICustomer customer)
         {
             _customer = customer;
+        }
+        public async Task<bool> ValidateUserAsync(string username, string password)
+        {
+            // Kullanıcı doğrulaması yapılacak, örneğin, veritabanında kullanıcı adı ve şifre kontrol edilebilir.
+            // Burada gerekli işlemleri gerçekleştirin.
+            return await _customer.ValidateUserAsync(username, password);
+        }
+
+        public async Task<Customer> GetUserByUsernameAsync(string username)
+        {
+            // Kullanıcı adına göre kullanıcıyı getirme işlemi yapılacak.
+            // Burada gerekli işlemleri gerçekleştirin.
+            return await _customer.GetUserByUsernameAsync(username);
         }
         public void CustomerAdd(Customer customer)
         {
@@ -34,6 +48,10 @@ namespace BusinessLayer.Concrete
         public List<Customer> GetCustomers()
         {
             return _customer.GetAll();
+        }
+        public Customer GetCustomer(int id)
+        {
+            return _customer.Get(id);
         }
     }
 }

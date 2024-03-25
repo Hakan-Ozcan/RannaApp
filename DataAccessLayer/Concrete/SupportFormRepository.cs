@@ -37,6 +37,10 @@ namespace DataAccessLayer.Concrete
         {
             return _context.Set<SupportForm>().ToList();
         }
+        public SupportForm Get(int id)
+        {
+            return _context.Set<SupportForm>().FirstOrDefault(m => m.Id == id);
+        }
 
         public void Update(int id, SupportForm updatedForm)
         {

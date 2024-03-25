@@ -21,6 +21,10 @@ namespace BusinessLayer.Concrete
         {
             return _supportform.GetAll();
         }
+        public SupportForm GetSupportForm(int id)
+        {
+            return _supportform.Get(id);
+        }
 
         public void SupportFormAdd(SupportForm supportForm)
         {

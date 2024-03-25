@@ -9,11 +9,14 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICustomer 
     {
+        Task<bool> ValidateUserAsync(string username, string password);
+        Task<Customer> GetUserByUsernameAsync(string username);
         //Create
         void Add(Customer p);
 
         //Read
         List<Customer> GetAll();
+        Customer Get(int id);
         //T GetByID(short id);
 
         //Update

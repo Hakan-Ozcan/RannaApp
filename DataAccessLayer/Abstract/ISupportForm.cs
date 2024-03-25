@@ -15,10 +15,9 @@ namespace DataAccessLayer.Abstract
         //Read
         List<SupportForm> GetAll();
         //T GetByID(short id);
-
+        SupportForm Get(int id);
         //Update
         void Update(int id, SupportForm updatedForm);
-
         //Delete
         //void DeleteByID(short id);
         void Delete(int id);
