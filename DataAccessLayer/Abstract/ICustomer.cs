@@ -9,7 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICustomer 
     {
-        Task<bool> ValidateUserAsync(string username, string password);
+     
         Task<Customer> GetUserByUsernameAsync(string username);
         //Create
         void Add(Customer p);
