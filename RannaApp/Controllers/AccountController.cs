@@ -2,6 +2,7 @@
 using DataAccessLayer.Abstract;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using RannaApi.Controllers;
 
 namespace RannaUI.Controllers
 {
@@ -27,27 +28,22 @@ namespace RannaUI.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Burada login işlemini gerçekleştirin, örneğin, veritabanında kullanıcı adı ve parolayı kontrol edin.
+                var authenticationController = new AuthenticationController(_customerService);
+                var loginResponse = await authenticationController.LoginAsync(model.UserName, model.Password);
 
-                // Başarılı bir login durumunda yönlendirme yapabilirsiniz.
-                //return RedirectToAction("Index", "Home");
-
-                // Kullanıcı adı ve parolayı kullanarak ilgili kullanıcıyı bul
-                var customer = GetCustomerByUsernameAndPassword(model.UserName, model.Password);
-
-                // Kullanıcı varsa ve parola doğruysa
-                if (customer != null)
+                if (loginResponse.result)
                 {
-                    // Giriş yapılabilir, örneğin ana sayfaya yönlendirme yapılabilir
+                    // Başarılı giriş
+                    // Token veya diğer bilgileri kullanabilirsiniz
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    // Kullanıcı adı veya parola hatalı ise hata mesajı gösterilebilir
+                    // Geçersiz kullanıcı adı veya parola
                     ModelState.AddModelError(string.Empty, "Geçersiz kullanıcı adı veya parola.");
                 }
             }
@@ -55,5 +51,6 @@ namespace RannaUI.Controllers
             // ModelState geçerli değilse, tekrar login sayfasını gösterin.
             return View(model);
         }
+
     }
 }

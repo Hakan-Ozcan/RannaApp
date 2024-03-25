@@ -9,7 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface ICustomerService
     {
-        LoginResponse ValidateUserAsync(string username, string password);
+        Task<bool> ValidateUserAsync(string username, string password);
         Task<Customer> GetUserByUsernameAsync(string username);
         void CustomerAdd(Customer customer);
         List<Customer> GetCustomers();

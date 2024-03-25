@@ -17,23 +17,25 @@ namespace RannaApi.Controllers
             _customerService = customerService;
         }
 
-        public LoginResponse LoginAsync(string username, string password)
+        public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             // Kullanıcı doğrulaması yap
-            var isAuthenticated = _customerService.ValidateUserAsync(username, password);
+            var isAuthenticated = await _customerService.ValidateUserAsync(username, password);
             if (!isAuthenticated)
             {
                 return new LoginResponse { result = false, token = null };
             }
 
             // Kullanıcıyı bul
-            var user = _customerService.GetUserByUsernameAsync(username);
+            var user = await _customerService.GetUserByUsernameAsync(username);
 
             // Token oluştur
-            var token = GenerateJwtToken(user.Id);
+            var token = GenerateJwtToken(user.id);
 
-            return new LoginResponse { result=true, token = token };
+            return new LoginResponse { result = true, token = token };
         }
+
+
 
         private string GenerateJwtToken(int userId)
         {
